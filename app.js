@@ -2,6 +2,7 @@ import express from "express";
 import session from "express-session";
 import passport from "passport";
 import passportLocal from "passport-local";
+import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import dotenv from "dotenv";
@@ -9,6 +10,7 @@ import dotenv from "dotenv";
 import { handleAccountStrategy, deserializeUser } from "./db/queries.js";
 import { handleRouting } from "./routers/appRouter.js";
 
+import { PrismaClient } from "./generated/prisma/client.js";
 const LocalStrategy = passportLocal.Strategy;
 
 dotenv.config();
@@ -35,6 +37,11 @@ app.use(
     secret: process.env.SECRET,
     resave: true,
     saveUninitialized: true,
+    store: new PrismaSessionStore(new PrismaClient(), {
+      checkPeriod: 2 * 60 * 1000,
+      dbRecordIdIsSessionId: true,
+      dbRecordIdFunction: undefined,
+    }),
   }),
 );
 app.use(passport.session());

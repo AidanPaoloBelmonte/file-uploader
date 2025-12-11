@@ -2,7 +2,7 @@ import { validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
 
 import { validateUser } from "./validationController.js";
-import "../db/queries.js";
+import { addUser } from "../db/queries.js";
 
 function getSignUp(req, res) {
   if (req.user) {
@@ -30,7 +30,7 @@ const postSignUp = [
 
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, 8);
-      await db.addUser(req.body.username, hashedPassword);
+      await addUser(req.body.username, hashedPassword);
 
       res.redirect("/");
     } catch (err) {
