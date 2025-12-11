@@ -1,0 +1,19 @@
+<dialog class="dialog">
+    <div class="dialog-container">
+        <div class="dialog-header">
+            <h2>New Post</h2>
+            <button class="btn close-dialog" type="button" onClick="">
+                Close
+            </button>
+        </div>
+        <p class="post-area
+            <%= locals?.user ? "logged" : "" %>
+            <%= locals?.user?.membership || locals?.user?.isadmin ? "member" : "" %>"
+            contentEditable=true
+            data-placeholder="What's up?"></p>
+        <form class="new-post-form" action="/post-message" method="POST">
+            <button class="submit btn" type="submit">Post</button>
+            <textarea name="post" id="post" minlength="3" maxlength="255" required></textarea>
+        </form>
+    </div>
+</dialog>

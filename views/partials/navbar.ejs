@@ -1,0 +1,31 @@
+<header>
+    <h1><a href="/">Silver States</a></h1>
+    <% if (locals?.user) { %>
+        <span><%= locals.user.username %></span>
+    <% } %>
+    <nav>
+        <ul>
+        <% if (!locals.user) { %>
+            <li><a class="btn lnk" href="log-in">Login</a></li>
+            <li><a class="btn lnk sp" href="sign-up">Sign Up</a></li>
+        <% } else { %>
+            <li>
+                <a class="btn lnk
+                    <%= locals?.user ? "logged" : "" %>
+                    <%= locals?.user?.membership || locals?.user?.isadmin ? "member" : "" %>" href="log-out">
+                        Log Out
+                    </a>
+            </li>
+            <% if (!locals.user.membership) { %>
+                <li>
+                    <a class="btn lnk up
+                    <%= locals?.user ? "logged" : "" %>
+                    <%= locals?.user?.membership || locals?.user?.isadmin ? "member" : "" %>"href="upgrade">
+                        Upgrade
+                    </a>
+                </li>
+            <% } %>
+        <% } %>
+        </ul>
+    </nav>
+</header>

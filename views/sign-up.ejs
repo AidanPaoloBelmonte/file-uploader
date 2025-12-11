@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles.css">
+
+    <meta charset="UTF-8">
+    <title>Sign Up - Silver States</title>
+</head>
+<body>
+    <%- include("./partials/navbar") %>
+    <div class="page signup">
+        <form class="acc signup" action="/sign-up" method="POST">
+            <h2>Sign Up</h2>
+            <div class="form-entry">
+                <label for="username">Username</label>
+                <input id="username" name="username" placeholder="username" type="text" required/>
+                <% if (locals.errors && locals.errors.username) { %>
+                    <span class="error"><%= errors.username %></span>
+                <% } %>
+            </div>
+            <div class="form-entry">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" required/>
+                <% if (locals.errors && locals.errors.password) { %>
+                    <span class="error"><%= errors.password %></span>
+                <% } %>
+            </div>
+            <button class="submit btn signup" type="submit">Sign Up</button>
+        </form>
+    </div>
+</body>
+</html>
