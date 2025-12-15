@@ -8,11 +8,21 @@ const storage = multer.diskStorage({
   filename: uploadController.handleStorage,
 });
 
-const upload = multer({ storage });
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: parseInt(process.env.MAX_FILESIZE),
+  },
+});
 
 const uploadRouter = Router();
 
 uploadRouter.get("/", uploadController.getUpload);
-uploadRouter.post("/", upload.single("file"), uploadController.postUpload);
+uploadRouter.post(
+  "/",
+  upload.single("file"),
+  uploadController.postUploadError,
+  uploadController.postUpload,
+);
 
 export default uploadRouter;

@@ -11,13 +11,19 @@ function getUpload(req, res) {
 }
 
 function postUpload(req, res) {
-  console.log(req.body);
-
-  if (!req.user) {
-    res.redirect("/");
-  }
-
   res.redirect("/");
+}
+
+function postUploadError(err, req, res, next) {
+  console.log("Errors:", err.code);
+  if (err.code === "LIMIT_FILE_SIZE") {
+    res.render("upload", {
+      user: req.user,
+      errors: "File must be under 1MB.",
+    });
+  } else {
+    next(err);
+  }
 }
 
 function handleStorage(req, file, cb) {
@@ -27,5 +33,6 @@ function handleStorage(req, file, cb) {
 export default {
   getUpload,
   postUpload,
+  postUploadError,
   handleStorage,
 };

@@ -10,7 +10,10 @@
 <body>
     <%- include("./partials/navbar") %>
     <form action="/upload" method="post" enctype="multipart/form-data">
-      <input type="file" name="file" />
+      <% if (locals.errors) { %>
+          <p class="error"><%= locals.errors %></p>
+      <% } %>
+      <input type="file" name="file" required />
       <button class="submit btn login" type="submit">Upload</button>
     </form>
 </body>
