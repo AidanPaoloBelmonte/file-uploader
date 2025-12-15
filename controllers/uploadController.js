@@ -10,8 +10,16 @@ function getUpload(req, res) {
   });
 }
 
-function postUpload(req, res) {
-  console.log(req.file);
+async function postUpload(req, res) {
+  try {
+    await db.registerFile(req.user.id, req.file);
+  } catch (err) {
+    console.log(err);
+    res.render("upload", {
+      user: req.user,
+      errors: err,
+    });
+  }
 
   res.redirect("/");
 }

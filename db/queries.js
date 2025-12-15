@@ -48,4 +48,19 @@ async function addUser(username, hashedPassword) {
   });
 }
 
-export { handleAccountStrategy, deserializeUser, addUser };
+async function registerFile(owner, fileData) {
+  await prisma.files.create({
+    data: {
+      owner: {
+        connect: {
+          id: owner,
+        },
+      },
+      filename: fileData.filename,
+      type: fileData.mimetype,
+      size: fileData.size,
+    },
+  });
+}
+
+export { handleAccountStrategy, deserializeUser, addUser, registerFile };

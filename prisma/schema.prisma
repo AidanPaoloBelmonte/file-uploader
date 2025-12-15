@@ -35,7 +35,7 @@ model Files {
   ownerID    Int
   filename   String   @db.VarChar(255)
   folder     Folders? @relation(fields: [folderID], references: [id])
-  folderID   Int
+  folderID   Int?
   type       String   @db.VarChar(255)
   size       Int
   uploadDate DateTime @default(now())
