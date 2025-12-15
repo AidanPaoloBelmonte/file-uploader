@@ -11,11 +11,12 @@ function getUpload(req, res) {
 }
 
 function postUpload(req, res) {
+  console.log(req.file);
+
   res.redirect("/");
 }
 
 function postUploadError(err, req, res, next) {
-  console.log("Errors:", err.code);
   if (err.code === "LIMIT_FILE_SIZE") {
     res.render("upload", {
       user: req.user,

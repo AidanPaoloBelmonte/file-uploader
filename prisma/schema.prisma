@@ -22,7 +22,33 @@ model Session {
 }
 
 model Users {
-  id       Int    @id @default(autoincrement())
-  username String @unique @db.VarChar(255)
-  password String @db.VarChar(255)
+  id       Int       @id @default(autoincrement())
+  username String    @unique @db.VarChar(255)
+  password String    @db.VarChar(255)
+  files    Files[]
+  folders  Folders[]
+}
+
+model Files {
+  id         Int      @id @default(autoincrement())
+  owner      Users    @relation(fields: [ownerID], references: [id])
+  ownerID    Int
+  filename   String   @db.VarChar(255)
+  folder     Folders? @relation(fields: [folderID], references: [id])
+  folderID   Int
+  type       String   @db.VarChar(255)
+  size       Int
+  uploadDate DateTime @default(now())
+}
+
+model Folders {
+  id           Int       @id @default(autoincrement())
+  foldername   String    @db.VarChar(255)
+  owner        Users     @relation(fields: [ownerID], references: [id])
+  ownerID      Int
+  parent       Folders?  @relation("hierarchy", fields: [parentID], references: [id])
+  parentID     Int
+  files        Files[]
+  subfolders   Folders[] @relation("hierarchy")
+  creationDate DateTime  @default(now())
 }
