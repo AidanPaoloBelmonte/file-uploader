@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import handleLogInRouting from "./logInRouter.js";
 import signUpRouter from "./signUpRouter.js";
+import uploadRouter from "./uploadRouter.js";
 import appController from "../controllers/generalController.js";
 
 export function handleRouting(passport) {
@@ -10,6 +11,7 @@ export function handleRouting(passport) {
   appRouter.get("/", appController.getHome);
   appRouter.use("/sign-up", signUpRouter);
   appRouter.use("/log-in", handleLogInRouting(passport));
+  appRouter.use("/upload", uploadRouter);
   appRouter.get("/log-out", appController.getLogOut);
 
   appRouter.all("/{*lost}", appController.getPageNotFound);

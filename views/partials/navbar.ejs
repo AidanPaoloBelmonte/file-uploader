@@ -1,5 +1,5 @@
 <header>
-    <h1><a href="/">Silver States</a></h1>
+    <h1><a href="/">FileSafe</a></h1>
     <% if (locals?.user) { %>
         <span><%= locals.user.username %></span>
     <% } %>
@@ -20,8 +20,8 @@
                 <li>
                     <a class="btn lnk up
                     <%= locals?.user ? "logged" : "" %>
-                    <%= locals?.user?.membership || locals?.user?.isadmin ? "member" : "" %>"href="upgrade">
-                        Upgrade
+                    <%= locals?.user?.membership || locals?.user?.isadmin ? "member" : "" %>"href="upload">
+                        Upload
                     </a>
                 </li>
             <% } %>
