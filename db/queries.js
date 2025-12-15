@@ -11,7 +11,7 @@ async function handleAccountStrategy(username, password, done) {
     });
 
     if (!user) {
-      return done(null.false, { message: "Incorrect Username" });
+      return done(null, false, { message: "Incorrect Username" });
     }
 
     const match = await bcrypt.compare(password, user.password);
