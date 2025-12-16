@@ -539,9 +539,38 @@ form.delete {
 }
 
 .page.upgrade {
-    min-height: 500px;
+    min-height: 70vh;
 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, 150px);
+    grid-template-rows: repeat(auto-fit, 150px);
+}
+
+.fs-entry {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 8px;
+    border: 0px;
+    border-radius: var(--border-radius-d);
+
+    font-family: inherit;
+    font-size: inherit;
+
+    background-color: transparent;
+
+    box-shadow:
+        0px 1px 2px 1px rgba(204, 221, 255, 0.1),
+        0px 4px 6px 3px rgba(204, 221, 255, 0.05);
+
+    user-select: none;
+}
+
+.fs-entry:hover {
+    background-color: rgba(204, 221, 255, 0.2);
+}
+
+.fs-entry:focus {
+    border: 1px solid #ccddff;
 }

@@ -20,9 +20,9 @@
             <% } %>
             <% if (locals?.files) { %>
                 <% files.forEach((file) => { %>
-                    <div class="fs-entry file">
+                    <button class="fs-entry file">
                         <span><%= file.filename %></span>
-                    </div>
+                    </button>
                 <% }) %>
             <% } %>
         <% } else { %>
