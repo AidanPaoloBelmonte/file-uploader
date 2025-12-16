@@ -71,10 +71,10 @@ async function getFolderContents(owner, folder = null) {
     },
   });
 
-  const folders = await prisma.files.findMany({
+  const folders = await prisma.folders.findMany({
     where: {
       ownerID: owner,
-      folder: folder === null ? { is: null } : folder,
+      parent: folder === null ? { is: null } : folder,
     },
   });
 

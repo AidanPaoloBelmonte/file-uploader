@@ -9,19 +9,25 @@
 </head>
 <body>
     <%- include("./partials/navbar") %>
-    <% if (locals?.files || locals?.folders) { %>
-        <% folders.forEach((folder) => { %>
-            <div class="fs-entry folder">
-                <p><%= folder.foldername %></p>
-            </div>
-        <% }) %>
-        <% files.forEach((file) => { %>
-            <div class="fs-entry file">
-                <p><%= file.filename %></p>
-            </div>
-        <% }) %>
-    <% } else { %>
-        <p> Nothing to see here. </p>
-    <% } %>
+    <div class="page upgrade">
+        <% if (locals?.files || locals?.folders) { %>
+            <% if (locals?.folders) { %>
+                <% folders.forEach((folder) => { %>
+                    <div class="fs-entry folder">
+                        <span><%= folder.foldername %></span>
+                    </div>
+                <% }) %>
+            <% } %>
+            <% if (locals?.files) { %>
+                <% files.forEach((file) => { %>
+                    <div class="fs-entry file">
+                        <span><%= file.filename %></span>
+                    </div>
+                <% }) %>
+            <% } %>
+        <% } else { %>
+            <p> Nothing to see here. </p>
+        <% } %>
+    </div>
 </body>
 </html>
