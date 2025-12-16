@@ -6,13 +6,13 @@
     <nav>
         <ul>
         <% if (!locals.user) { %>
-            <li><a class="btn lnk" href="log-in">Login</a></li>
-            <li><a class="btn lnk sp" href="sign-up">Sign Up</a></li>
+            <li><a class="btn lnk" href="/log-in">Login</a></li>
+            <li><a class="btn lnk sp" href="/sign-up">Sign Up</a></li>
         <% } else { %>
             <li>
                 <a class="btn lnk
                     <%= locals?.user ? "logged" : "" %>
-                    <%= locals?.user?.membership || locals?.user?.isadmin ? "member" : "" %>" href="log-out">
+                    <%= locals?.user?.membership || locals?.user?.isadmin ? "member" : "" %>" href="/log-out">
                         Log Out
                     </a>
             </li>
@@ -20,7 +20,7 @@
                 <li>
                     <a class="btn lnk up
                     <%= locals?.user ? "logged" : "" %>
-                    <%= locals?.user?.membership || locals?.user?.isadmin ? "member" : "" %>"href="upload">
+                    <%= locals?.user?.membership || locals?.user?.isadmin ? "member" : "" %>"href="/upload">
                         Upload
                     </a>
                 </li>

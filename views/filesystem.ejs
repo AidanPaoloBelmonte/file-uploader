@@ -10,6 +10,11 @@
 <body>
     <%- include("./partials/navbar") %>
     <% if (locals?.files || locals?.folders) { %>
+        <% folders.forEach((folder) => { %>
+            <div class="fs-entry file">
+                <p><%= folder.foldername %></p>
+            </div>
+        <% }) %>
         <% files.forEach((file) => { %>
             <div class="fs-entry file">
                 <p><%= file.filename %></p>
