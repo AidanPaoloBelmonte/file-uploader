@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/styles.css">
-    <script src="./handleDialog.js" defer></script>
+    <!--<script src="./handleDialog.js" defer></script>-->
 
     <meta charset="UTF-8">
     <title>FileSafe</title>
@@ -11,7 +11,7 @@
     <%- include("./partials/navbar") %>
     <% if (locals?.files || locals?.folders) { %>
         <% folders.forEach((folder) => { %>
-            <div class="fs-entry file">
+            <div class="fs-entry folder">
                 <p><%= folder.foldername %></p>
             </div>
         <% }) %>

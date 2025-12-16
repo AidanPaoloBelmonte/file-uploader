@@ -4,14 +4,8 @@ import { validatePost } from "./validationController.js";
 import * as db from "../db/queries.js";
 
 async function getHome(req, res) {
-  // const posts = await db.fetchPosts(
-  //   10,
-  //   req?.user?.membership || req?.user?.isadmin,
-  // );
-
   const props = {
     user: req.user,
-    // posts: posts,
   };
 
   res.render("index", props);

@@ -1,5 +1,7 @@
 import * as db from "../db/queries.js";
 
+let called = 0;
+
 async function getFilesystemBase(req, res) {
   if (!req.user) {
     res.redirect("/");
