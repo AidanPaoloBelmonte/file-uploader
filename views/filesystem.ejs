@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="./handleDialog.js" defer></script>
+
+    <meta charset="UTF-8">
+    <title>FileSafe</title>
+</head>
+<body>
+    <%- include("./partials/navbar") %>
+    <% if (locals?.files || locals?.folders) { %>
+        <% files.forEach((file) => { %>
+            <div class="fs-entry file">
+                <p><%= file.filename %></p>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p> Nothing to see here. </p>
+    <% } %>
+</body>
+</html>

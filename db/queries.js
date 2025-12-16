@@ -63,4 +63,28 @@ async function registerFile(owner, fileData) {
   });
 }
 
-export { handleAccountStrategy, deserializeUser, addUser, registerFile };
+async function getFolderContents(owner, folder = null) {
+  const files = await prisma.files.findMany({
+    where: {
+      ownerID: owner,
+      folder: folder === null ? { is: null } : folder,
+    },
+  });
+
+  const folders = await prisma.files.findMany({
+    where: {
+      ownerID: owner,
+      folder: folder === null ? { is: null } : folder,
+    },
+  });
+
+  return { files, folders };
+}
+
+export {
+  handleAccountStrategy,
+  deserializeUser,
+  addUser,
+  registerFile,
+  getFolderContents,
+};
