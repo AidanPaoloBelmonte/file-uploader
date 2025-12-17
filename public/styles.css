@@ -544,6 +544,9 @@ form.delete {
     display: grid;
     grid-template-columns: repeat(auto-fit, 150px);
     grid-template-rows: repeat(auto-fit, 150px);
+
+    padding: 16px 32px;
+    margin-top: 8px;
 }
 
 .fs-entry {
@@ -590,6 +593,67 @@ form.delete {
     background: url("./icons/file-cloud-outline.svg");
 }
 
-.folder > .img-con {
+.folder > div {
     content: url("./icons/folder-outline.svg");
+}
+
+.fs-menu {
+    height: max-content;
+    max-height: 150px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    padding: 4px 32px;
+}
+
+.fs-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+    margin-left: auto;
+}
+
+.fs-action {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    font-family: inherit;
+    font-weight: 700;
+
+    background-color: #ccddff;
+
+    box-shadow:
+        0px 1px 2px 1px rgba(204, 221, 255, 0.1),
+        0px 5px 6px 3px rgba(204, 221, 255, 0.05);
+
+    div {
+        width: 24px;
+        aspect-ratio: 1/1;
+    }
+}
+
+.fs-action.btn {
+    padding: 8px 16px 8px 12px;
+}
+
+.fs-action.btn:hover {
+    background-color: rgba(204, 221, 255, 0.8);
+}
+
+.u-file {
+    background: url("./icons/file-upload-outline.svg");
+}
+
+.u-folder {
+    background: url("./icons/folder-plus-outline.svg");
+}
+
+.img-con {
+    background-repeat: no-repeat;
+    background-size: contain;
 }

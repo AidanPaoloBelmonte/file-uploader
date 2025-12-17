@@ -9,12 +9,27 @@
 </head>
 <body>
     <%- include("./partials/navbar") %>
+    <div class="fs-menu">
+        <div class="breadcrumb">
+
+        </div>
+        <div class="fs-actions">
+            <button class="fs-action btn">
+                <div class="u-file img-con"></div>
+                <span>Upload</span>
+            </button>
+            <button class="fs-action btn">
+                <div class="u-folder img-con"></div>
+                <span>New Folder</span>
+            </button>
+        </div>
+    </div>
     <div class="page upgrade">
         <% if (locals?.files || locals?.folders) { %>
             <% if (locals?.folders) { %>
                 <% folders.forEach((folder) => { %>
                     <div class="fs-entry folder">
-                        <div></div>
+                        <div class="img-con"></div>
                         <span><%= folder.foldername %></span>
                     </div>
                 <% }) %>
@@ -22,7 +37,7 @@
             <% if (locals?.files) { %>
                 <% files.forEach((file) => { %>
                     <button class="fs-entry file">
-                        <div></div>
+                        <div class="img-con"></div>
                         <span><%= file.filename %></span>
                     </button>
                 <% }) %>
