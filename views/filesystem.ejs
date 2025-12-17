@@ -14,6 +14,7 @@
             <% if (locals?.folders) { %>
                 <% folders.forEach((folder) => { %>
                     <div class="fs-entry folder">
+                        <div></div>
                         <span><%= folder.foldername %></span>
                     </div>
                 <% }) %>
@@ -21,6 +22,7 @@
             <% if (locals?.files) { %>
                 <% files.forEach((file) => { %>
                     <button class="fs-entry file">
+                        <div></div>
                         <span><%= file.filename %></span>
                     </button>
                 <% }) %>

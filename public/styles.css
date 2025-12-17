@@ -548,8 +548,9 @@ form.delete {
 
 .fs-entry {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    gap: 8px;
 
     padding: 8px;
     border: 0px;
@@ -565,6 +566,16 @@ form.delete {
         0px 4px 6px 3px rgba(204, 221, 255, 0.05);
 
     user-select: none;
+
+    div {
+        flex: 1 auto;
+        aspect-ratio: 1 / 1;
+
+        outline: 0px;
+
+        filter: brightness(0) saturate(100%) invert(22%) sepia(26%)
+            saturate(515%) hue-rotate(186deg) brightness(91%) contrast(88%);
+    }
 }
 
 .fs-entry:hover {
@@ -572,5 +583,13 @@ form.delete {
 }
 
 .fs-entry:focus {
-    border: 1px solid #ccddff;
+    outline: 1px solid #ccddff;
+}
+
+.file > div {
+    background: url("./icons/file-cloud-outline.svg");
+}
+
+.folder > .img-con {
+    content: url("./icons/folder-outline.svg");
 }
