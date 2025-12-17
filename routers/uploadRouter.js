@@ -17,7 +17,6 @@ const upload = multer({
 
 const uploadRouter = Router();
 
-uploadRouter.get("/", uploadController.getUpload);
 uploadRouter.post(
   "/",
   upload.single("file"),

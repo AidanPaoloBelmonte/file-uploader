@@ -1,15 +1,5 @@
 import * as db from "../db/queries.js";
 
-function getUpload(req, res) {
-  if (!req.user) {
-    res.redirect("/");
-  }
-
-  res.render("upload", {
-    user: req.user,
-  });
-}
-
 async function postUpload(req, res) {
   try {
     await db.registerFile(req.user.id, req.file);
@@ -40,7 +30,6 @@ function handleStorage(req, file, cb) {
 }
 
 export default {
-  getUpload,
   postUpload,
   postUploadError,
   handleStorage,

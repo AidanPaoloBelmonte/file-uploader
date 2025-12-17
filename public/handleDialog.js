@@ -1,20 +1,24 @@
-// const dialog = document.querySelector(".dialog");
-// const closeDialog = document.querySelector(".close-dialog");
-// const newPost = document.querySelector(".new-post");
-// const form = document.querySelector(".new-post-form");
-// const submit = form.querySelector(".submit");
-// const textarea = form.querySelector("textarea");
-// const postArea = dialog.querySelector(".post-area");
+const btnUpload = document.querySelector(".fs-action.upload");
+const btnNewFolder = document.querySelector(".fs-action.create");
 
-// newPost.addEventListener("click", (e) => {
-//   dialog.showModal();
-// });
+const dlgUpload = document.querySelector(".dialog.upload");
+const dlgNewFolder = document.querySelector(".dialog.create");
+const closeDialog = document.querySelector(".close-dialog");
 
-// closeDialog.addEventListener("click", (e) => {
-//   textarea.value = "";
-//   dialog.close();
-// });
+if (btnUpload != undefined && dlgUpload != undefined) {
+  btnUpload.addEventListener("click", (e) => {
+    dlgUpload.showModal();
+  });
+}
 
-// submit.addEventListener("click", (e) => {
-//   textarea.value = postArea.textContent;
-// });
+if (btnNewFolder != undefined && dlgNewFolder != undefined) {
+  btnNewFolder.addEventListener("click", (e) => {
+    dlgNewFolder.showModal();
+  });
+}
+
+if (closeDialog != undefined) {
+  if (closeDialog.parent === dlgUpload || closeDialog.parent === dlgNewFolder) {
+    closeDialog.parent.close();
+  }
+}

@@ -622,6 +622,7 @@ form.delete {
     align-items: center;
     gap: 4px;
 
+    color: #393f51;
     font-family: inherit;
     font-weight: 700;
 
@@ -634,6 +635,11 @@ form.delete {
     div {
         width: 24px;
         aspect-ratio: 1/1;
+    }
+
+    .img-con {
+        filter: brightness(0) saturate(100%) invert(20%) sepia(16%)
+            saturate(895%) hue-rotate(187deg) brightness(97%) contrast(85%);
     }
 }
 
