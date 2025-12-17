@@ -663,3 +663,48 @@ form.delete {
     background-repeat: no-repeat;
     background-size: contain;
 }
+
+form.upload {
+    height: 500px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 4px;
+
+    input {
+        background-color: rgba(204, 221, 255, 0.05);
+
+        transition: background-color 150ms ease;
+    }
+
+    button {
+        margin: 16px auto;
+    }
+}
+
+.input-con {
+    flex: 1 auto;
+
+    box-sizing: border-box;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 4px dashed #343f53;
+
+    background-color: rgba(204, 221, 255, 0.3);
+
+    transition: background-color 150ms ease;
+}
+
+.input-con:hover {
+    background-color: rgba(204, 221, 255, 0.8);
+
+    input {
+        background-color: rgba(204, 221, 255, 0.1);
+    }
+}

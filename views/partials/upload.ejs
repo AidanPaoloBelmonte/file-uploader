@@ -1,11 +1,15 @@
 <dialog class="dialog upload">
-    <form action=<%= locals.uploadDest ? locals.uploadDest : "/uploads" %>
+    <form
+        class="upload"
+        action=<%= locals.uploadDest ? locals.uploadDest : "/uploads" %>
         method="post"
         enctype="multipart/form-data">
       <% if (locals.errors) { %>
           <p class="error"><%= locals.errors %></p>
       <% } %>
-      <input type="file" name="file" required />
+      <div class="input-con">
+          <input type="file" name="file" required />
+      </div>
       <button class="submit btn login" type="submit">Upload</button>
     </form>
 </dialog>
