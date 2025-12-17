@@ -48,7 +48,7 @@ async function addUser(username, hashedPassword) {
   });
 }
 
-async function registerFile(owner, fileData) {
+async function registerFile(owner, fileData, folderTree) {
   await prisma.files.create({
     data: {
       owner: {

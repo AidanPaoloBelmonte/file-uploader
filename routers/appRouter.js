@@ -3,9 +3,23 @@ import { Router } from "express";
 import handleLogInRouting from "./logInRouter.js";
 import signUpRouter from "./signUpRouter.js";
 import filesystemRouter from "./filesystemRouter.js";
-import uploadRouter from "./uploadRouter.js";
+import uploadController from "../controllers/uploadController.js";
 import appController from "../controllers/generalController.js";
 import authController from "../controllers/authenticationController.js";
+
+import multer from "multer";
+
+const storage = multer.diskStorage({
+  destination: "./uploads/",
+  filename: uploadController.handleStorage,
+});
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: parseInt(process.env.MAX_FILESIZE),
+  },
+});
 
 export function handleRouting(passport) {
   const appRouter = Router();
@@ -14,7 +28,13 @@ export function handleRouting(passport) {
   appRouter.use("/sign-up", signUpRouter);
   appRouter.use("/log-in", handleLogInRouting(passport));
   appRouter.use("/filesystem", filesystemRouter);
-  appRouter.use("/upload", authController.authenticateUser, uploadRouter);
+  appRouter.post(
+    "/uploads{/*folder}",
+    authController.authenticateUser,
+    upload.single("file"),
+    uploadController.postUploadError,
+    uploadController.postUpload,
+  );
   appRouter.get("/log-out", appController.getLogOut);
 
   appRouter.all("/{*lost}", appController.getPageNotFound);

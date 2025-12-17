@@ -4,14 +4,13 @@ async function postUpload(req, res) {
   try {
     await db.registerFile(req.user.id, req.file);
   } catch (err) {
-    console.log(err);
     res.render("upload", {
       user: req.user,
       errors: err,
     });
   }
 
-  res.redirect("/");
+  res.redirect("/filesystem");
 }
 
 function postUploadError(err, req, res, next) {
