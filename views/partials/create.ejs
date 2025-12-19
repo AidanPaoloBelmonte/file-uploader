@@ -1,0 +1,16 @@
+<dialog class="dialog create">
+    <div class="form-header">
+        <label for="folder"><h2>New Folder</h2></label>
+    </div>
+    <form
+        class="fs create"
+        action=<%= "/create" + (locals.dest !== undefined ? "/" + locals.dest.join("/") : "") %>
+        method="post"
+        enctype="multipart/form-data">
+      <% if (locals.errors) { %>
+          <p class="error"><%= locals.errors %></p>
+      <% } %>
+      <input type="field" name="folder" id="folder" required>
+      <button class="submit btn login" type="submit">Create</button>
+    </form>
+</dialog>

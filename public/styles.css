@@ -664,7 +664,22 @@ form.delete {
     background-size: contain;
 }
 
-form.upload {
+dialog.dialog.create {
+    min-height: 150px;
+
+    form {
+        height: 150px;
+        justify-content: space-around;
+    }
+
+    input {
+        background-color: rgba(204, 221, 255, 0.3);
+
+        transition: background-color 150ms ease;
+    }
+}
+
+form.fs {
     height: 500px;
 
     display: flex;
@@ -674,6 +689,8 @@ form.upload {
     gap: 4px;
 
     input {
+        text-align: center;
+
         background-color: rgba(204, 221, 255, 0.05);
 
         transition: background-color 150ms ease;
@@ -681,6 +698,16 @@ form.upload {
 
     button {
         margin: 16px auto;
+    }
+}
+
+.form-header {
+    align-self: stretch;
+
+    padding: 8px 12px;
+
+    h2 {
+        margin: 4px;
     }
 }
 
