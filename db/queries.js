@@ -48,7 +48,7 @@ async function addUser(username, hashedPassword) {
   });
 }
 
-async function registerFile(owner, fileData, folderTree) {
+async function registerFile(owner, fileData, base = null) {
   await prisma.files.create({
     data: {
       owner: {
@@ -59,8 +59,42 @@ async function registerFile(owner, fileData, folderTree) {
       filename: fileData.filename,
       type: fileData.mimetype,
       size: fileData.size,
+      folder:
+        base === null
+          ? { is: null }
+          : {
+              connect: {
+                id: base,
+              },
+            },
     },
   });
+}
+
+async function createFolder(owner, foldername, base = null) {
+  const query = {
+    data: {
+      owner: {
+        connect: {
+          id: owner,
+        },
+      },
+      foldername: foldername,
+    },
+  };
+
+  // Add ID of Parent if Subfolder
+  if (base && base?.id) {
+    query.data.parent = {
+      parent: {
+        connect: {
+          id: base.id,
+        },
+      },
+    };
+  }
+
+  await prisma.folders.create(query);
 }
 
 async function getFolderContents(owner, folder = null) {
@@ -81,10 +115,68 @@ async function getFolderContents(owner, folder = null) {
   return { files, folders };
 }
 
+async function getBaseFolder(owner, paths, depth = 0) {
+  if (paths == null || paths == undefined || paths?.length < 2) {
+    return null;
+  }
+
+  const base = depth < 1 ? null : paths[depth - 1];
+  const current = paths[depth];
+  const next = paths.length === depth + 1 ? null : paths[depth + 1];
+
+  const f = await prisma.folders.findFirst({
+    where: {
+      ownerID: owner,
+      foldername: current,
+      parent: base == null ? { is: null } : base,
+    },
+  });
+
+  if (next == null) {
+    return f;
+  }
+
+  if (
+    f == null ||
+    f == undefined ||
+    f.subfolders == null ||
+    f.subfolder == undefined
+  ) {
+    return null;
+  }
+
+  getBaseFolder(owner, paths.shift, depth + 1);
+}
+
+async function uniqueInFolder(owner, item, folder = null, type = null) {
+  let isUnique = True;
+
+  isUnique =
+    (await prisma.files.findFirst({
+      where: {
+        filename: item,
+        ownerID: owner,
+        folder: folder === null ? { is: null } : folder,
+      },
+    })) === null;
+
+  isUnique =
+    (await prisma.folders.findFirst({
+      where: {
+        foldername: item,
+        ownerID: owner,
+        folder: folder === null ? { is: null } : folder,
+      },
+    })) === null;
+}
+
 export {
   handleAccountStrategy,
   deserializeUser,
   addUser,
   registerFile,
+  createFolder,
   getFolderContents,
+  getBaseFolder,
+  uniqueInFolder,
 };

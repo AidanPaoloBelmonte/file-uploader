@@ -21,32 +21,6 @@ function getLogOut(req, res) {
   });
 }
 
-const postNewMessage = [
-  validatePost,
-  async (req, res, next) => {
-    const errors = {};
-    validationResult(req).errors.forEach((err) => {
-      errors[err.path] = err.msg;
-    });
-
-    if (Object.keys(errors).length > 0) {
-      return res.status(400).render("/", {
-        errors: errors,
-      });
-    }
-
-    await db.addPost(req.user, req.body.post);
-
-    res.redirect("/");
-  },
-];
-
-async function postDeletePost(req, res) {
-  await db.deletePost(req.params?.id);
-
-  res.redirect("/");
-}
-
 function getPageNotFound(req, res) {
   res.status(404).render("notfound");
 }
@@ -54,7 +28,5 @@ function getPageNotFound(req, res) {
 export default {
   getHome,
   getLogOut,
-  postNewMessage,
-  postDeletePost,
   getPageNotFound,
 };

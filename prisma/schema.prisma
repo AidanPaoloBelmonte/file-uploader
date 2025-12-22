@@ -47,7 +47,7 @@ model Folders {
   owner        Users     @relation(fields: [ownerID], references: [id])
   ownerID      Int
   parent       Folders?  @relation("hierarchy", fields: [parentID], references: [id])
-  parentID     Int
+  parentID     Int?
   files        Files[]
   subfolders   Folders[] @relation("hierarchy")
   creationDate DateTime  @default(now())

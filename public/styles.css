@@ -544,6 +544,7 @@ form.delete {
     display: grid;
     grid-template-columns: repeat(auto-fit, 150px);
     grid-template-rows: repeat(auto-fit, 150px);
+    gap: 32px;
 
     padding: 16px 32px;
     margin-top: 8px;
@@ -571,6 +572,7 @@ form.delete {
     user-select: none;
 
     div {
+        min-height: 0px;
         flex: 1 auto;
         aspect-ratio: 1 / 1;
 

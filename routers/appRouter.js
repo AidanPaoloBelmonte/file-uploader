@@ -4,6 +4,7 @@ import handleLogInRouting from "./logInRouter.js";
 import signUpRouter from "./signUpRouter.js";
 import filesystemRouter from "./filesystemRouter.js";
 import uploadController from "../controllers/uploadController.js";
+import createController from "../controllers/createController.js";
 import appController from "../controllers/generalController.js";
 import authController from "../controllers/authenticationController.js";
 
@@ -34,6 +35,11 @@ export function handleRouting(passport) {
     upload.single("file"),
     uploadController.postUploadError,
     uploadController.postUpload,
+  );
+  appRouter.post(
+    "/create{/*folder}",
+    authController.authenticateUser,
+    createController.postCreate,
   );
   appRouter.get("/log-out", appController.getLogOut);
 

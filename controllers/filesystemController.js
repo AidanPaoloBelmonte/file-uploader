@@ -12,7 +12,6 @@ async function getFilesystemBase(req, res) {
 
 async function getFilesystem(req, res) {
   const fs = await db.getFolderContents(req.user.id);
-  console.log("getFilesystem", req.params?.folder);
 
   const props = {
     user: req.user,

@@ -1,4 +1,5 @@
 import { body } from "express-validator";
+import * as db from "../db/queries.js";
 
 const reqErr = "is required.";
 const lenErr = `must be between $1 and $2 characters.`;
@@ -29,5 +30,23 @@ const validatePost = [
     .isLength({ min: 3, max: 255 })
     .withMessage(`The post must be between 3 and 255 characters.`),
 ];
+
+async function uniqueInFolder(req, res) {
+  const folder = req.params?.folder;
+
+  let item = "";
+  let type = "";
+  if (req?.file != null && req?.file != undefined) {
+    item = req.file;
+    type = "file";
+  } else if (req.body?.folder != null && req.body?.folder != undefined) {
+    item = req.body.folder;
+    type = "folder";
+  } else {
+    res.redirect("/filesystem");
+  }
+
+  const isUnique = await db.uniqueInFolder(req.user, item);
+}
 
 export { validateUser, validatePost };

@@ -30,10 +30,10 @@
         <% if (locals?.files || locals?.folders) { %>
             <% if (locals?.folders) { %>
                 <% folders.forEach((folder) => { %>
-                    <div class="fs-entry folder">
+                    <button class="fs-entry folder">
                         <div class="img-con"></div>
                         <span><%= folder.foldername %></span>
-                    </div>
+                    </button>
                 <% }) %>
             <% } %>
             <% if (locals?.files) { %>
