@@ -32,7 +32,7 @@
                 <% folders.forEach((folder) => { %>
                     <a
                         class="fs-entry folder"
-                        href="/<%= folder.foldername %>"
+                        href="<%= locals.directory %>/<%= folder.foldername %>"
                     >
                         <div class="img-con"></div>
                         <span><%= folder.foldername %></span>
