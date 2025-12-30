@@ -574,7 +574,7 @@ form.delete {
 
     user-select: none;
 
-    div {
+    .img-con {
         min-height: 0px;
         flex: 1 auto;
         aspect-ratio: 1 / 1;
@@ -594,11 +594,11 @@ form.delete {
     outline: 1px solid #ccddff;
 }
 
-.file > div {
+.file > .img-con {
     background: url("./icons/file-cloud-outline.svg");
 }
 
-.folder > div {
+.folder > .img-con {
     content: url("./icons/folder-outline.svg");
 }
 
@@ -746,4 +746,36 @@ form.fs {
 
     text-align: center;
     font-weight: bold;
+}
+
+.ctx-menu {
+    z-index: 10;
+
+    min-width: 120px;
+    position: absolute;
+
+    padding: 4px 0px;
+    border: 1px solid rgba(204, 221, 255, 0.8);
+    border-radius: var(--border-radius-d);
+
+    background-color: rgba(248, 249, 250, 0.99);
+
+    box-shadow:
+        0px 1px 2px 1px rgba(204, 221, 255, 0.1),
+        0px 5px 6px 3px rgba(204, 221, 255, 0.05);
+
+    ul {
+        list-style-type: none;
+
+        padding: 0px;
+        margin: 0px;
+    }
+
+    li {
+        padding: 4px 16px;
+
+        font-size: 1.1rem;
+
+        user-select: none;
+    }
 }

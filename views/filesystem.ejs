@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="/styles.css">
     <script src="/handleDialog.js" defer></script>
+    <script src="/handleContextMenu.js" defer></script>
 
     <meta charset="UTF-8">
     <title>FileSafe</title>
@@ -42,10 +43,10 @@
                 <% } %>
                 <% if (locals?.files) { %>
                     <% files.forEach((file) => { %>
-                        <button class="fs-entry file">
+                        <a class="fs-entry file" href="/view/file/<%= file.id %>">
                             <div class="img-con"></div>
                             <span><%= file.filename %></span>
-                        </button>
+                        </a>
                     <% }) %>
                 <% } %>
             </div>
@@ -54,4 +55,12 @@
         <% } %>
     </div>
 </body>
+<template class="tplt-ctx-menu">
+    <div class="ctx-menu">
+        <ul>
+            <li>Move</li>
+            <li>Delete</li>
+        </ul>
+    </div>
+</template>
 </html>
