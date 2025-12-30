@@ -98,25 +98,41 @@ async function createFolder(owner, foldername, base = null) {
 }
 
 async function getFolderContents(owner, folder = null) {
+  if (folder?.id === -1) {
+    return {
+      files: [],
+      folders: [],
+    };
+  }
+
+  const whereFileQuery = {
+    ownerID: owner,
+  };
+  const whereFolderQuery = {
+    ownerID: owner,
+  };
+
+  if (folder == null) {
+    whereFileQuery.folder = { is: null };
+    whereFolderQuery.parent = { is: null };
+  } else {
+    whereFileQuery.folderID = folder;
+    whereFolderQuery.parentID = folder;
+  }
+
   const files = await prisma.files.findMany({
-    where: {
-      ownerID: owner,
-      folder: folder === null ? { is: null } : folder,
-    },
+    where: whereFileQuery,
   });
 
   const folders = await prisma.folders.findMany({
-    where: {
-      ownerID: owner,
-      parent: folder === null ? { is: null } : folder,
-    },
+    where: whereFolderQuery,
   });
 
   return { files, folders };
 }
 
 async function getBaseFolder(owner, paths, depth = 0) {
-  if (paths == null || paths == undefined || paths?.length < 2) {
+  if (paths == null || paths == undefined || paths?.length < 1) {
     return null;
   }
 
@@ -132,17 +148,12 @@ async function getBaseFolder(owner, paths, depth = 0) {
     },
   });
 
-  if (next == null) {
-    return f;
+  if (f == null || f == undefined) {
+    return { id: -1 };
   }
 
-  if (
-    f == null ||
-    f == undefined ||
-    f.subfolders == null ||
-    f.subfolder == undefined
-  ) {
-    return null;
+  if (next == null) {
+    return f;
   }
 
   getBaseFolder(owner, paths.shift, depth + 1);

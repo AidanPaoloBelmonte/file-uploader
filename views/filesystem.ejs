@@ -27,28 +27,30 @@
         </div>
     </div>
     <div class="page upgrade">
-        <% if (locals?.files || locals?.folders) { %>
-            <% if (locals?.folders) { %>
-                <% folders.forEach((folder) => { %>
-                    <a
-                        class="fs-entry folder"
-                        href="<%= locals.directory %>/<%= folder.foldername %>"
-                    >
-                        <div class="img-con"></div>
-                        <span><%= folder.foldername %></span>
-                    </a>
-                <% }) %>
-            <% } %>
-            <% if (locals?.files) { %>
-                <% files.forEach((file) => { %>
-                    <button class="fs-entry file">
-                        <div class="img-con"></div>
-                        <span><%= file.filename %></span>
-                    </button>
-                <% }) %>
-            <% } %>
+        <% if (locals?.files?.length || locals?.folders?.length) { %>
+            <div class="dir-contents">
+                <% if (locals?.folders) { %>
+                    <% folders.forEach((folder) => { %>
+                        <a
+                            class="fs-entry folder"
+                            href="<%= locals.directory %>/<%= folder.foldername %>"
+                        >
+                            <div class="img-con"></div>
+                            <span><%= folder.foldername %></span>
+                        </a>
+                    <% }) %>
+                <% } %>
+                <% if (locals?.files) { %>
+                    <% files.forEach((file) => { %>
+                        <button class="fs-entry file">
+                            <div class="img-con"></div>
+                            <span><%= file.filename %></span>
+                        </button>
+                    <% }) %>
+                <% } %>
+            </div>
         <% } else { %>
-            <p> Nothing to see here. </p>
+            <p class="fs-error"> <%= locals?.error %> </p>
         <% } %>
     </div>
 </body>

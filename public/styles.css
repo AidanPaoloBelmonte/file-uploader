@@ -541,13 +541,14 @@ form.delete {
 .page.upgrade {
     min-height: 70vh;
 
+    margin-top: 8px;
+}
+
+.dir-contents {
     display: grid;
     grid-template-columns: repeat(auto-fit, 150px);
     grid-template-rows: repeat(auto-fit, 150px);
     gap: 32px;
-
-    padding: 16px 32px;
-    margin-top: 8px;
 }
 
 .fs-entry {
@@ -738,4 +739,11 @@ form.fs {
     input {
         background-color: rgba(204, 221, 255, 0.1);
     }
+}
+
+.fs-error {
+    width: 100%;
+
+    text-align: center;
+    font-weight: bold;
 }

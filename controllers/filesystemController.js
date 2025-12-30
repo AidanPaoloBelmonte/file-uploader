@@ -11,9 +11,18 @@ async function getFilesystemBase(req, res) {
 }
 
 async function getFilesystem(req, res) {
-  const fs = await db.getFolderContents(req.user.id);
+  const baseFolder = await db.getBaseFolder(req.user.id, req.params?.folder);
+  const fs = await db.getFolderContents(req.user.id, baseFolder?.id);
+
   const basedir = req.params?.folder ? "/" + req.params.folder.join("/") : "";
   const dir = `/filesystem/${req.user.username}${basedir}`;
+
+  let error = "";
+  if (baseFolder?.id === -1) {
+    error = "This directory does not exist! Let's go back.";
+  } else if (!fs.files.length && !fs.folders.length) {
+    error = "This folder is empty. Try uploading something!";
+  }
 
   const props = {
     user: req.user,
@@ -21,6 +30,7 @@ async function getFilesystem(req, res) {
     directory: dir,
     files: fs?.files,
     folders: fs?.folders,
+    error: error,
   };
 
   res.render("filesystem", props);
