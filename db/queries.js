@@ -48,6 +48,16 @@ async function addUser(username, hashedPassword) {
   });
 }
 
+async function getUser(id) {
+  const owner = await prisma.users.findFirst({
+    where: {
+      id: id,
+    },
+  });
+
+  return owner;
+}
+
 async function registerFile(owner, fileData, base = null) {
   await prisma.files.create({
     data: {
@@ -95,6 +105,36 @@ async function createFolder(owner, foldername, base = null) {
   }
 
   await prisma.folders.create(query);
+}
+
+async function getFile(owner, id) {
+  if (id === null) {
+    return null;
+  }
+
+  const file = await prisma.files.findFirst({
+    where: {
+      ownerID: owner,
+      id: parseInt(id),
+    },
+  });
+
+  return file;
+}
+
+async function getFolder(owner, id) {
+  if (id === null) {
+    return null;
+  }
+
+  const folder = await prisma.files.findFirst({
+    where: {
+      ownerID: owner,
+      id: parseInt(id),
+    },
+  });
+
+  return folder;
 }
 
 async function getFolderContents(owner, folder = null) {
@@ -185,8 +225,11 @@ export {
   handleAccountStrategy,
   deserializeUser,
   addUser,
+  getUser,
   registerFile,
   createFolder,
+  getFile,
+  getFolder,
   getFolderContents,
   getBaseFolder,
   uniqueInFolder,

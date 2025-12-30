@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles.css">
+
+    <meta charset="UTF-8">
+    <title>FileSafe</title>
+</head>
+<body>
+    <%- include("./partials/navbar") %>
+    <div class="page view-file">
+        <div class="view-icon"></div>
+        <div class="file-details">
+          <h2><%= locals.file.filename %></h2>
+          <p><%= locals.file.owner %></p>
+          <table>
+              <tr>
+                <td>Type</td>
+                <td><%= locals.file.type %></td>
+              </tr>
+              <tr>
+                <td>Size</td>
+                <td><%= Math.ceil(locals.file.size / 1024) %>mb</td>
+              </tr>
+              <tr>
+                  <td>Upload Date</td>
+                  <td><%= new Date(locals.file.uploadDate).toLocaleDateString(navigator.language, {
+                      month: "long",
+                      year: "numeric",
+                      day: "2-digit",
+                      hour: "numeric",
+                      minute: "numeric"
+                  }) %></td>
+              </tr>
+          </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -43,7 +43,7 @@
                 <% } %>
                 <% if (locals?.files) { %>
                     <% files.forEach((file) => { %>
-                        <a class="fs-entry file" href="/view/file/<%= file.id %>">
+                        <a class="fs-entry file" href="/view/<%= file.id %>">
                             <div class="img-con"></div>
                             <span><%= file.filename %></span>
                         </a>

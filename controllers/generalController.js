@@ -1,8 +1,3 @@
-import { validationResult } from "express-validator";
-
-import { validatePost } from "./validationController.js";
-import * as db from "../db/queries.js";
-
 async function getHome(req, res) {
   const props = {
     user: req.user,

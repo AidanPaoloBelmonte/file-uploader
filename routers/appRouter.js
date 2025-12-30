@@ -3,6 +3,7 @@ import { Router } from "express";
 import handleLogInRouting from "./logInRouter.js";
 import signUpRouter from "./signUpRouter.js";
 import filesystemRouter from "./filesystemRouter.js";
+import viewController from "../controllers/viewController.js";
 import uploadController from "../controllers/uploadController.js";
 import createController from "../controllers/createController.js";
 import appController from "../controllers/generalController.js";
@@ -40,6 +41,11 @@ export function handleRouting(passport) {
     "/create{/*folder}",
     authController.authenticateUser,
     createController.postCreate,
+  );
+  appRouter.get(
+    "/view/:id",
+    authController.authenticateUser,
+    viewController.getView,
   );
   appRouter.get("/log-out", appController.getLogOut);
 
