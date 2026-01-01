@@ -221,6 +221,52 @@ async function uniqueInFolder(owner, item, folder = null, type = null) {
     })) === null;
 }
 
+async function deleteFile(owner, id) {
+  await prisma.files.delete({
+    where: {
+      id: id,
+      ownerID: owner,
+    },
+  });
+}
+
+async function deleteFolder(owner, id) {
+  const folder = await prisma.folders.findFirst({
+    where: {
+      id: id,
+      ownerID: owner,
+    },
+  });
+
+  if (folder === null || folder === undefined) {
+    throw new Error(
+      "The requested folder was either already deleted or does not exist.",
+    );
+  }
+
+  await prisma.files.deleteMany({
+    where: {
+      ownerID: owner,
+      folderID: folder.id,
+    },
+  });
+
+  await prisma.folders.deleteMany({
+    where: {
+      OR: [
+        {
+          id: id,
+          ownerID: owner,
+        },
+        {
+          parentID: folder.id,
+          ownerID: owner,
+        },
+      ],
+    },
+  });
+}
+
 export {
   handleAccountStrategy,
   deserializeUser,
@@ -233,4 +279,6 @@ export {
   getFolderContents,
   getBaseFolder,
   uniqueInFolder,
+  deleteFile,
+  deleteFolder,
 };

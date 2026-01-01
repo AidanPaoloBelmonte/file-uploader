@@ -3,6 +3,7 @@ import { Router } from "express";
 import handleLogInRouting from "./logInRouter.js";
 import signUpRouter from "./signUpRouter.js";
 import filesystemRouter from "./filesystemRouter.js";
+import deleteController from "../controllers/deleteController.js";
 import viewController from "../controllers/viewController.js";
 import uploadController from "../controllers/uploadController.js";
 import createController from "../controllers/createController.js";
@@ -46,6 +47,11 @@ export function handleRouting(passport) {
     "/view/:id",
     authController.authenticateUser,
     viewController.getView,
+  );
+  appRouter.post(
+    "/delete",
+    authController.authenticateUser,
+    deleteController.postDelete,
   );
   appRouter.get("/log-out", appController.getLogOut);
 

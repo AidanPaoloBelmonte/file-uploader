@@ -772,11 +772,23 @@ form.fs {
     }
 
     li {
-        padding: 4px 16px;
-
         font-size: 1.1rem;
 
         user-select: none;
+    }
+
+    button {
+        color: inherit;
+        font-size: inherit;
+        text-align: left;
+
+        width: 100%;
+
+        background-color: transparent;
+    }
+
+    button:hover {
+        background-color: rgba(204, 221, 255, 0.8);
     }
 }
 
@@ -845,4 +857,8 @@ tr > td:first-child {
     margin-top: 64px;
 
     font-size: 1.2rem;
+}
+
+.hidden {
+    display: none;
 }

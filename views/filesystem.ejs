@@ -35,6 +35,7 @@
                         <a
                             class="fs-entry folder"
                             href="<%= locals.directory %>/<%= folder.foldername %>"
+                            data-id="<%= folder.id %>"
                         >
                             <div class="img-con"></div>
                             <span><%= folder.foldername %></span>
@@ -43,7 +44,11 @@
                 <% } %>
                 <% if (locals?.files) { %>
                     <% files.forEach((file) => { %>
-                        <a class="fs-entry file" href="/view/<%= file.id %>">
+                        <a
+                            class="fs-entry file"
+                            href="/view/<%= file.id %>"
+                            data-id="<%= file.id %>"
+                        >
                             <div class="img-con"></div>
                             <span><%= file.filename %></span>
                         </a>
@@ -58,8 +63,16 @@
 <template class="tplt-ctx-menu">
     <div class="ctx-menu">
         <ul>
-            <li>Move</li>
-            <li>Delete</li>
+            <li>
+                <button class="btn">Move</button>
+            </li>
+            <li>
+                <form action="/delete" method="POST">
+                    <input class="hidden del-type" name="fileType" id="fileType" type="number" value="0" aria-hidden  required />
+                    <input class="hidden del-entry" name="entryID" id="entryID" type="number" value="0" aria-hidden  required />
+                    <button class="ctx-action btn" type="submit">Delete</button>
+                </form>
+            </li>
         </ul>
     </div>
 </template>
