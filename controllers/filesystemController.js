@@ -28,13 +28,18 @@ async function getFilesystem(req, res) {
     }),
   );
 
-  console.log(folderList);
-
   let error = "";
+  let showCrumbs = true;
   if (baseFolder?.id === -1) {
+    showCrumbs = false;
     error = "This directory does not exist! Let's go back.";
   } else if (!fs.files.length && !fs.folders.length) {
     error = "This folder is empty. Try uploading something!";
+  }
+
+  let paths = null;
+  if (req.params?.folder?.length && req.params?.folder?.length > 0) {
+    paths = JSON.parse(JSON.stringify(req.params.folder));
   }
 
   const props = {
@@ -44,6 +49,8 @@ async function getFilesystem(req, res) {
     files: fs?.files,
     folders: fs?.folders,
     allFolders: folderList,
+    showCrumbs: showCrumbs,
+    paths: paths,
     error: error,
   };
 

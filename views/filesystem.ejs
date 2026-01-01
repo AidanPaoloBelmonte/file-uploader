@@ -14,7 +14,17 @@
     <%- include("./partials/create") %>
     <div class="fs-menu">
         <div class="breadcrumb">
-
+            <a class="crumb" href="/filesystem">/</a>
+            <% if (locals?.showCrumbs && locals.paths?.length) { %>
+                <% locals.paths.forEach((p, i) => { %>
+                    <a
+                        class="crumb"
+                        href="/filesystem/<%= user.username %>/<%=locals.paths.splice(0, i + 1).join("/")%>"
+                    >
+                        <%= p %>/
+                    </a>
+                <% }) %>
+            <% } %>
         </div>
         <div class="fs-actions">
             <button class="fs-action btn upload">

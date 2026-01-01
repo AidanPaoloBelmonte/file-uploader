@@ -609,8 +609,32 @@ form.delete {
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 16px;
 
     padding: 4px 32px;
+}
+
+.breadcrumb {
+    flex: 1 auto;
+    align-self: stretch;
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    padding: 0px 8px;
+
+    background-color: rgba(204, 221, 255, 0.3);
+}
+
+.crumb {
+    color: inherit;
+    text-decoration: none;
+
+    background-color: #ccddff;
+
+    padding: 4px 12px;
+    border-radius: var(--border-radius-d);
 }
 
 .fs-actions {
@@ -618,8 +642,6 @@ form.delete {
     flex-direction: row;
     align-items: center;
     gap: 8px;
-
-    margin-left: auto;
 }
 
 .fs-action {
