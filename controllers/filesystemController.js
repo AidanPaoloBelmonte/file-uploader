@@ -18,6 +18,18 @@ async function getFilesystem(req, res) {
   const basedir = req.params?.folder ? "/" + req.params.folder.join("/") : "";
   const dir = `/filesystem/${req.user.username}${basedir}`;
 
+  const userFolders = await db.getAllFolders(req.user.id);
+  const folderList = await Promise.all(
+    userFolders.map(async (f) => {
+      return {
+        id: f.id,
+        path: await db.getFolderAbsolutePath(f.id),
+      };
+    }),
+  );
+
+  console.log(folderList);
+
   let error = "";
   if (baseFolder?.id === -1) {
     error = "This directory does not exist! Let's go back.";
@@ -31,6 +43,7 @@ async function getFilesystem(req, res) {
     directory: dir,
     files: fs?.files,
     folders: fs?.folders,
+    allFolders: folderList,
     error: error,
   };
 

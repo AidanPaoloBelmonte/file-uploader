@@ -135,6 +135,37 @@ async function getFolder(owner, id) {
   return folder;
 }
 
+async function getAllFolders(owner) {
+  const folders = await prisma.folders.findMany({
+    where: {
+      ownerID: owner,
+    },
+  });
+
+  return folders;
+}
+
+async function getFolderAbsolutePath(folder, path = "") {
+  const f = await prisma.folders.findFirst({
+    where: {
+      id: folder,
+    },
+  });
+
+  if (f == null) {
+    if (!path) {
+      return "/";
+    }
+    return path;
+  }
+
+  if (f.parentID == null) {
+    return `/${f.foldername}` + path;
+  }
+
+  return getFolderAbsolutePath(folder.parentID, `/${f.foldername}` + path);
+}
+
 async function getFolderContents(owner, folder = null) {
   if (folder?.id === -1) {
     return {
@@ -273,6 +304,8 @@ export {
   createFolder,
   getFile,
   getFolder,
+  getAllFolders,
+  getFolderAbsolutePath,
   getFolderContents,
   getBaseFolder,
   uniqueInFolder,
