@@ -2,7 +2,6 @@ import { X509Certificate } from "node:crypto";
 import * as db from "../db/queries.js";
 
 async function postDelete(req, res) {
-  console.log(req.body);
   let type = parseInt(req.body?.fileType);
   const id = parseInt(req.body?.entryID);
 
