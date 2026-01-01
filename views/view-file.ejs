@@ -9,10 +9,15 @@
 <body>
     <%- include("./partials/navbar") %>
     <div class="page view-file">
-        <div class="view-icon"></div>
+        <div class="view-icon file">
+            <img
+                src="/icons/file-cloud-outline.svg"
+                height="500px"
+            ></img>
+        </div>
         <div class="file-details">
           <h2><%= locals.file.filename %></h2>
-          <p><%= locals.file.owner %></p>
+          <p class="file-owner"><%= locals.file.owner %></p>
           <table>
               <tr>
                 <td>Type</td>
@@ -33,6 +38,7 @@
                   }) %></td>
               </tr>
           </table>
+          <button class="download btn">Download</button>
         </div>
     </div>
 </body>
