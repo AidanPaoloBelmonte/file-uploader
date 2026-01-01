@@ -96,10 +96,8 @@ async function createFolder(owner, foldername, base = null) {
   // Add ID of Parent if Subfolder
   if (base && base?.id) {
     query.data.parent = {
-      parent: {
-        connect: {
-          id: base.id,
-        },
+      connect: {
+        id: base.id,
       },
     };
   }
@@ -171,12 +169,11 @@ async function getFolderContents(owner, folder = null) {
   return { files, folders };
 }
 
-async function getBaseFolder(owner, paths, depth = 0) {
-  if (paths == null || paths == undefined || paths?.length < 1) {
+async function getBaseFolder(owner, paths, depth = 0, parent = null) {
+  if (paths == null || paths == undefined) {
     return null;
   }
 
-  const base = depth < 1 ? null : paths[depth - 1];
   const current = paths[depth];
   const next = paths.length === depth + 1 ? null : paths[depth + 1];
 
@@ -184,7 +181,7 @@ async function getBaseFolder(owner, paths, depth = 0) {
     where: {
       ownerID: owner,
       foldername: current,
-      parent: base == null ? { is: null } : base,
+      parent: parent == null ? { is: null } : parent,
     },
   });
 
@@ -196,7 +193,7 @@ async function getBaseFolder(owner, paths, depth = 0) {
     return f;
   }
 
-  getBaseFolder(owner, paths.shift, depth + 1);
+  return getBaseFolder(owner, paths, depth + 1, f);
 }
 
 async function uniqueInFolder(owner, item, folder = null, type = null) {

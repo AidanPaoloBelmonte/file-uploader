@@ -10,7 +10,8 @@ async function postCreate(req, res) {
 
     await db.createFolder(req.user.id, req.body.newFolder, base);
 
-    res.redirect("/filesystem");
+    const basedir = req.params?.folder ? "/" + req.params.folder.join("/") : "";
+    res.redirect(`/filesystem/${req.user.username}${basedir}`);
   } catch (err) {
     console.log(err);
     res.redirect(`/filesystem/${req.user.username}`);

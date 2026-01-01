@@ -12,6 +12,7 @@ async function getFilesystemBase(req, res) {
 
 async function getFilesystem(req, res) {
   const baseFolder = await db.getBaseFolder(req.user.id, req.params?.folder);
+
   const fs = await db.getFolderContents(req.user.id, baseFolder?.id);
 
   const basedir = req.params?.folder ? "/" + req.params.folder.join("/") : "";
