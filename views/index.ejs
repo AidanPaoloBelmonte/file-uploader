@@ -9,5 +9,18 @@
 </head>
 <body>
     <%- include("./partials/navbar") %>
+    <div class="index page">
+      <% if (!locals?.user) { %>
+        <div class="index section tag">
+            <h2 class="tagline">Keep your data safe.<br>Absolutely safe.</h2>
+            <a class="btn lnk logged sp" href="/sign-up">Sign Up</a>
+        </div>
+      <% } else { %>
+          <div class="index section start">
+              <h2 class="tagline">See your files now.</h2>
+              <a class="btn lnk member up sp" href="/filesystem">Go to Files</a>
+          </div>
+      <% } %>
+    </div>
 </body>
 </html>
