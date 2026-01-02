@@ -14,6 +14,7 @@
     "@types/node": "^24.9.2",
     "@types/pg": "^8.15.6",
     "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.8.0",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "express-validator": "^7.3.0",

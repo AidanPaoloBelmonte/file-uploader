@@ -283,7 +283,7 @@ button.btn.member:hover {
     min-height: 500px;
 
     padding: 0px;
-    border: 0px;
+    border: 2px solid rgba(204, 221, 255, 1);
     border-radius: var(--border-radius-d);
 
     background-color: #f8f9fa;
