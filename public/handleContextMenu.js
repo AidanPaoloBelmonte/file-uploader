@@ -1,11 +1,13 @@
-const ctxMenu = document.querySelector(".tplt-ctx-menu");
 const fsEntries = document.querySelectorAll(".fs-entry");
-
-const frag = ctxMenu.content.querySelector("div");
 
 function prepareContextMenu(type = 0, id = 0) {
   frag.querySelector(".del-type").value = type;
   frag.querySelector(".del-entry").value = id;
+
+  if (dlgMoveEntry) {
+    dlgMoveEntry.querySelector(".del-type").value = type;
+    dlgMoveEntry.querySelector(".del-entry").value = id;
+  }
 }
 
 function openContextMenu(e, baseElement) {
@@ -21,6 +23,7 @@ function openContextMenu(e, baseElement) {
     type = 2;
   }
 
+  console.log(type, baseElement.dataset?.id);
   prepareContextMenu(type, baseElement.dataset?.id);
 
   e.preventDefault();

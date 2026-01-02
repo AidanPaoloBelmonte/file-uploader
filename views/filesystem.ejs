@@ -12,6 +12,7 @@
     <%- include("./partials/navbar") %>
     <%- include("./partials/upload") %>
     <%- include("./partials/create") %>
+    <%- include("./partials/move") %>
     <div class="fs-menu">
         <div class="breadcrumb">
             <a class="crumb" href="/filesystem">/</a>
@@ -69,21 +70,21 @@
             <p class="fs-error"> <%= locals?.error %> </p>
         <% } %>
     </div>
+    <template class="tplt-ctx-menu">
+        <div class="ctx-menu">
+            <ul>
+                <li>
+                    <button class="btn move">Move</button>
+                </li>
+                <li>
+                    <form action="/delete" method="POST">
+                        <input class="hidden del-type" name="fileType" id="fileType" type="number" value="0" aria-hidden  required />
+                        <input class="hidden del-entry" name="entryID" id="entryID" type="number" value="0" aria-hidden  required />
+                        <button class="ctx-action btn" type="submit">Delete</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </template>
 </body>
-<template class="tplt-ctx-menu">
-    <div class="ctx-menu">
-        <ul>
-            <li>
-                <button class="btn">Move</button>
-            </li>
-            <li>
-                <form action="/delete" method="POST">
-                    <input class="hidden del-type" name="fileType" id="fileType" type="number" value="0" aria-hidden  required />
-                    <input class="hidden del-entry" name="entryID" id="entryID" type="number" value="0" aria-hidden  required />
-                    <button class="ctx-action btn" type="submit">Delete</button>
-                </form>
-            </li>
-        </ul>
-    </div>
-</template>
 </html>

@@ -249,6 +249,29 @@ async function uniqueInFolder(owner, item, folder = null, type = null) {
     })) === null;
 }
 
+async function moveEntry(type, id, target = null) {
+  if (target === 0) {
+    target = null;
+  }
+
+  const model = type === 1 ? prisma.files : prisma.folders;
+  const targetQuery =
+    target === null ? { disconnect: true } : { connect: { id: target } };
+  const subquery =
+    type === 1
+      ? {
+          folder: targetQuery,
+        }
+      : {
+          parent: targetQuery,
+        };
+
+  await model.update({
+    where: { id: id },
+    data: subquery,
+  });
+}
+
 async function deleteFile(owner, id) {
   await prisma.files.delete({
     where: {
@@ -309,6 +332,7 @@ export {
   getFolderContents,
   getBaseFolder,
   uniqueInFolder,
+  moveEntry,
   deleteFile,
   deleteFolder,
 };

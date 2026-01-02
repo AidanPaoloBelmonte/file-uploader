@@ -1,0 +1,28 @@
+<dialog class="dialog move">
+    <div class="form-header">
+        <label for="moveEntry"><h2>Move</h2></label>
+    </div>
+    <form
+        class="fs create"
+        action="/move"
+        method="POST">
+      <% if (locals.errors) { %>
+          <p class="error"><%= locals.errors %></p>
+      <% } %>
+      <input class="hidden del-type" name="fileType" id="fileType" type="number" value="0" aria-hidden  required />
+      <input class="hidden del-entry" name="entryID" id="entryID" type="number" value="0" aria-hidden  required />
+      <select name="moveEntry" id="moveEntry" required>
+          <optgroup label="Directories">
+              <option value="0" selected>/</option>
+              <% if (locals?.allFolders?.length > 0) { %>
+                  <% locals.allFolders.forEach((a) => { %>
+                      <option value="<%= a.id %>">
+                          <%= a.path %>
+                      </option>
+                  <% }); %>
+          </optgroup>
+          <% } %>
+      </select>
+      <button class="submit btn login" type="submit">Move</button>
+    </form>
+</dialog>

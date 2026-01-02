@@ -691,7 +691,8 @@ form.delete {
     background-size: contain;
 }
 
-dialog.dialog.create {
+dialog.dialog.create,
+dialog.dialog.move {
     min-height: 150px;
 
     form {
@@ -883,4 +884,19 @@ tr > td:first-child {
 
 .hidden {
     display: none;
+}
+
+#moveEntry {
+    font-size: 1.2rem;
+
+    border: 0px;
+    border-radius: var(--border-radius-d);
+
+    background-color: rgba(204, 221, 255, 0.3);
+
+    transition: background-color 150ms ease;
+
+    optgroup {
+        font-size: 1rem;
+    }
 }
