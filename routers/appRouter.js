@@ -13,8 +13,7 @@ import authController from "../controllers/authenticationController.js";
 
 import multer from "multer";
 
-const storage = multer.diskStorage({
-  destination: "./uploads/",
+const storage = multer.memoryStorage({
   filename: uploadController.handleStorage,
 });
 
@@ -38,6 +37,7 @@ export function handleRouting(passport) {
     upload.single("file"),
     uploadController.postUploadError,
     uploadController.postUpload,
+    uploadController.postUploadRegister,
   );
   appRouter.post(
     "/create{/*folder}",

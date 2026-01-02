@@ -3,8 +3,7 @@ import multer from "multer";
 
 import uploadController from "../controllers/uploadController.js";
 
-const storage = multer.diskStorage({
-  destination: "./uploads/",
+const storage = multer.memoryStorage({
   filename: uploadController.handleStorage,
 });
 

@@ -59,26 +59,29 @@ async function getUser(id) {
 }
 
 async function registerFile(owner, fileData, base = null) {
-  await prisma.files.create({
+  const query = {
     data: {
       owner: {
         connect: {
           id: owner,
         },
       },
-      filename: fileData.filename,
+      filename: fileData.originalname,
       type: fileData.mimetype,
       size: fileData.size,
-      folder:
-        base === null
-          ? { is: null }
-          : {
-              connect: {
-                id: base,
-              },
-            },
+      url: fileData.url,
     },
-  });
+  };
+
+  if (base != null) {
+    query.data.folder = {
+      connect: {
+        id: base,
+      },
+    };
+  }
+
+  await prisma.files.create(query);
 }
 
 async function createFolder(owner, foldername, base = null) {

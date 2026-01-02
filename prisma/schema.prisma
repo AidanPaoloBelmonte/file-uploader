@@ -39,6 +39,7 @@ model Files {
   type       String   @db.VarChar(255)
   size       Int
   uploadDate DateTime @default(now())
+  url        String
 }
 
 model Folders {
